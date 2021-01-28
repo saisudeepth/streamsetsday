@@ -1,0 +1,93 @@
+version: '3.5'
+# NOTE: By using this docker-compose file you accept the Microsoft EULA.
+#  See link to MS SQL End User License Agreement: https://hub.docker.com/_/microsoft-mssql-server
+services:
+
+  transformer-node1:
+    image: streamsets/transformer:latest
+    container_name: transformer-node1
+    hostname: transformer-node1
+    restart: on-failure
+    expose:
+      - 19630
+    ports:
+      - 19630:19630
+    environment:
+      - TRANSFORMER_CONF_http.authentication=form
+      - TRANSFORMER_INSTALL_SAMPLE_PIPELINES=/tmp/lab_solutions
+    entrypoint:
+      - "/pre-docker-entrypoint.sh"
+    volumes:
+      - transformer-data:/data
+      - ./files/transformer/lab_solutions:/tmp/lab_solutions
+      - ./files/transformer/pre-docker-entrypoint.sh:/pre-docker-entrypoint.sh
+      - ./files/transformer/lab3:/data/transformer/lab3
+
+  sdc-node1:
+    image: streamsets/datacollector:latest
+    container_name: sdc-node1
+    hostname: sdc-node1
+    restart: unless-stopped
+    expose:
+      - 18630
+    ports:
+      - 18630:18630
+    environment:
+      - SDC_CONF_http.authentication=form
+      - SDC_INSTALL_SAMPLE_PIPELINES=/tmp/lab_solutions
+      - SDC_INSTALL_STAGES=streamsets-datacollector-apache-kafka_2_0-lib,streamsets-datacollector-aws-lib,streamsets-datacollector-basic-lib,streamsets-datacollector-cdh_6_3-lib,streamsets-datacollector-dataformats-lib,streamsets-datacollector-dev-lib,streamsets-datacollector-jdbc-lib,streamsets-datacollector-mysql-binlog-lib,streamsets-datacollector-orchestrator-lib,streamsets-datacollector-redis-lib,streamsets-datacollector-stats-lib,streamsets-datacollector-windows-lib
+      - SDC_INSTALL_ENTERPRISE_STAGES=streamsets-datacollector-snowflake-lib-1.6.0
+    command:
+      - "dc"
+      - "-exec"
+    entrypoint:
+      - "/pre-docker-entrypoint.sh"
+    volumes:
+      - sdc-data:/data
+      - ./files/data-collector/lab_solutions:/tmp/lab_solutions
+      - ./files/data-collector/pre-docker-entrypoint.sh:/pre-docker-entrypoint.sh
+#      - ./files/data-collector/install_pipelines:/tmp/install_pipelines
+
+  sqlserver:
+    # Docs: https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-configure-environment-variables?view=sql-server-2017
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    restart: always
+    expose:
+      - 1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Training123
+      - MSSQL_PID=Developer
+      - MSSQL_MEMORY_LIMIT_MB=4096 #2048
+      - MSSQL_DATA_DIR=/data
+    entrypoint:
+      - "/scripts/pre-docker-entrypoint.sh"
+    volumes:
+      - sqlserver-data:/data
+      - ./files/sqlserver:/scripts
+
+  sqlpad:
+    image: sqlpad/sqlpad:latest
+    restart: unless-stopped
+    volumes:
+      - ./files/sqlpad/sqlpad.sqlite:/var/lib/sqlpad/sqlpad.sqlite
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
+    environment:
+      SQLPAD_ADMIN: 'admin'
+      SQLPAD_ADMIN_PASSWORD: 'admin'
+      SQLPAD_APP_LOG_LEVEL: info
+      SQLPAD_WEB_LOG_LEVEL: warn
+      SQLPAD_CONNECTIONS__sqlserver__name: StreamSets Days
+      SQLPAD_CONNECTIONS__sqlserver__driver: sqlserver
+      SQLPAD_CONNECTIONS__sqlserver__host: sqlserver
+      SQLPAD_CONNECTIONS__sqlserver__database: streamsetsdays
+      SQLPAD_CONNECTIONS__sqlserver__username: sa
+      SQLPAD_CONNECTIONS__sqlserver__password: Training123
+
+volumes:
+  transformer-data:
+  sdc-data:
+  sqlserver-data:

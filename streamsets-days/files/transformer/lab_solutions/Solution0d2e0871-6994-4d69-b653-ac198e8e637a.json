@@ -1,0 +1,935 @@
+{
+  "pipelineConfig" : {
+    "schemaVersion" : 6,
+    "version" : 22,
+    "pipelineId" : "Solution0d2e0871-6994-4d69-b653-ac198e8e637a",
+    "title" : "Solution - Lab 3 SCD",
+    "description" : "Tutorial - https://academy.streamsets.com/courses/streamsets-day/",
+    "uuid" : "163425f3-5d8f-4d79-a5d1-6e45b5e9cd5f",
+    "configuration" : [ {
+      "name" : "executionMode",
+      "value" : "BATCH"
+    }, {
+      "name" : "edgeHttpUrl",
+      "value" : "http://localhost:18633"
+    }, {
+      "name" : "deliveryGuarantee",
+      "value" : "AT_LEAST_ONCE"
+    }, {
+      "name" : "testOriginStage",
+      "value" : "streamsets-datacollector-dev-lib::com_streamsets_pipeline_stage_devtest_rawdata_RawDataDSource::3"
+    }, {
+      "name" : "startEventStage",
+      "value" : "streamsets-datacollector-basic-lib::com_streamsets_pipeline_stage_destination_devnull_ToErrorNullDTarget::1"
+    }, {
+      "name" : "stopEventStage",
+      "value" : "streamsets-datacollector-basic-lib::com_streamsets_pipeline_stage_destination_devnull_ToErrorNullDTarget::1"
+    }, {
+      "name" : "shouldRetry",
+      "value" : true
+    }, {
+      "name" : "triggerInterval",
+      "value" : 2000
+    }, {
+      "name" : "retryAttempts",
+      "value" : -1
+    }, {
+      "name" : "ludicrousMode",
+      "value" : false
+    }, {
+      "name" : "ludicrousModeInputCount",
+      "value" : false
+    }, {
+      "name" : "advancedErrorHandling",
+      "value" : false
+    }, {
+      "name" : "notifyOnStates",
+      "value" : [ "RUN_ERROR", "STOPPED", "FINISHED" ]
+    }, {
+      "name" : "emailIDs",
+      "value" : [ ]
+    }, {
+      "name" : "constants",
+      "value" : [ ]
+    }, {
+      "name" : "errorRecordPolicy",
+      "value" : "ORIGINAL_RECORD"
+    }, {
+      "name" : "workerCount",
+      "value" : 0
+    }, {
+      "name" : "clusterSlaveMemory",
+      "value" : 2048
+    }, {
+      "name" : "clusterSlaveJavaOpts",
+      "value" : "-XX:+UseConcMarkSweepGC -XX:+UseParNewGC -Dlog4j.debug"
+    }, {
+      "name" : "clusterLauncherEnv",
+      "value" : [ ]
+    }, {
+      "name" : "mesosDispatcherURL",
+      "value" : null
+    }, {
+      "name" : "logLevel",
+      "value" : "ERROR"
+    }, {
+      "name" : "hdfsS3ConfDir",
+      "value" : null
+    }, {
+      "name" : "rateLimit",
+      "value" : 0
+    }, {
+      "name" : "maxRunners",
+      "value" : 0
+    }, {
+      "name" : "runnerIdleTIme",
+      "value" : 60
+    }, {
+      "name" : "shouldCreateFailureSnapshot",
+      "value" : true
+    }, {
+      "name" : "webhookConfigs",
+      "value" : [ ]
+    }, {
+      "name" : "sparkConfigs",
+      "value" : [ {
+        "key" : "spark.driver.memory",
+        "value" : "2G"
+      }, {
+        "key" : "spark.driver.cores",
+        "value" : "1"
+      }, {
+        "key" : "spark.executor.memory",
+        "value" : "2G"
+      }, {
+        "key" : "spark.executor.cores",
+        "value" : "1"
+      }, {
+        "key" : "spark.dynamicAllocation.enabled",
+        "value" : "true"
+      }, {
+        "key" : "spark.shuffle.service.enabled",
+        "value" : "true"
+      }, {
+        "key" : "spark.dynamicAllocation.minExecutors",
+        "value" : "1"
+      }, {
+        "key" : "spark.dynamicAllocation.maxExecutors",
+        "value" : "1"
+      }, {
+        "key" : "spark.hadoop.validateOutputSpecs",
+        "value" : "false"
+      } ]
+    }, {
+      "name" : "preprocessScript",
+      "value" : "/*\nThe following script define a method\nthat increments an integer by 1 \nand registers it as a UDF with \nthe SparkSession, which can be accessed\nusing the variable named \"spark\":\ndef inc(i: Integer): Integer = {\n  i + 1\n}\nspark.udf.register (\"inc\", inc _)\n\n*/"
+    }, {
+      "name" : "clusterConfig.clusterType",
+      "value" : "LOCAL"
+    }, {
+      "name" : "clusterConfig.sparkMasterUrl",
+      "value" : "local[*]"
+    }, {
+      "name" : "clusterConfig.deployMode",
+      "value" : "CLIENT"
+    }, {
+      "name" : "clusterConfig.hadoopUserName",
+      "value" : null
+    }, {
+      "name" : "clusterConfig.sparkAppName",
+      "value" : "${pipeline:title()}"
+    }, {
+      "name" : "clusterConfig.stagingDir",
+      "value" : "/streamsets"
+    }, {
+      "name" : "clusterConfig.useYarnKerberosKeytab",
+      "value" : false
+    }, {
+      "name" : "clusterConfig.yarnKerberosKeytabSource",
+      "value" : "PROPERTIES_FILE"
+    }, {
+      "name" : "clusterConfig.yarnKerberosKeytab",
+      "value" : null
+    }, {
+      "name" : "clusterConfig.yarnKerberosKeytabBase64Bytes",
+      "value" : null
+    }, {
+      "name" : "clusterConfig.yarnKerberosPrincipal",
+      "value" : "name@DOMAIN"
+    }, {
+      "name" : "clusterConfig.callbackUrl",
+      "value" : null
+    }, {
+      "name" : "databricksConfig.baseUrl",
+      "value" : null
+    }, {
+      "name" : "databricksConfig.credentialType",
+      "value" : "TOKEN"
+    }, {
+      "name" : "databricksConfig.username",
+      "value" : null
+    }, {
+      "name" : "databricksConfig.password",
+      "value" : null
+    }, {
+      "name" : "databricksConfig.token",
+      "value" : null
+    }, {
+      "name" : "databricksConfig.provisionNewCluster",
+      "value" : true
+    }, {
+      "name" : "databricksConfig.clusterId",
+      "value" : null
+    }, {
+      "name" : "databricksConfig.clusterConfig",
+      "value" : "{\n    \"num_workers\": 8,\n    \"spark_version\": \"5.3.x-scala2.11\",\n    \"node_type_id\": \"i3.xlarge\"\n}"
+    }, {
+      "name" : "databricksConfig.terminateCluster",
+      "value" : false
+    }, {
+      "name" : "livyConfig.baseUrl",
+      "value" : "https://localhost:30443/gateway/default/livy/v1/"
+    }, {
+      "name" : "livyConfig.username",
+      "value" : null
+    }, {
+      "name" : "livyConfig.password",
+      "value" : null
+    }, {
+      "name" : "sdcEmrConnectionSelection",
+      "value" : "MANUAL"
+    }, {
+      "name" : "sdcEmrConnection.awsConfig.credentialMode",
+      "value" : "WITH_CREDENTIALS"
+    }, {
+      "name" : "sdcEmrConnection.awsConfig.awsAccessKeyId",
+      "value" : null
+    }, {
+      "name" : "sdcEmrConnection.awsConfig.awsSecretAccessKey",
+      "value" : null
+    }, {
+      "name" : "sdcEmrConnection.awsConfig.roleARN",
+      "value" : ""
+    }, {
+      "name" : "sdcEmrConnection.awsConfig.roleSessionName",
+      "value" : null
+    }, {
+      "name" : "sdcEmrConnection.awsConfig.sessionDuration",
+      "value" : 3600
+    }, {
+      "name" : "sdcEmrConnection.awsConfig.setSessionTags",
+      "value" : true
+    }, {
+      "name" : "sdcEmrConnection.region",
+      "value" : "US_WEST_2"
+    }, {
+      "name" : "sdcEmrConnection.customRegion",
+      "value" : null
+    }, {
+      "name" : "sdcEmrConnection.s3StagingUri",
+      "value" : null
+    }, {
+      "name" : "sdcEmrConnection.provisionNewCluster",
+      "value" : false
+    }, {
+      "name" : "sdcEmrConnection.clusterId",
+      "value" : null
+    }, {
+      "name" : "sdcEmrConnection.emrVersion",
+      "value" : null
+    }, {
+      "name" : "sdcEmrConnection.clusterPrefix",
+      "value" : null
+    }, {
+      "name" : "sdcEmrConnection.terminateCluster",
+      "value" : true
+    }, {
+      "name" : "sdcEmrConnection.loggingEnabled",
+      "value" : true
+    }, {
+      "name" : "sdcEmrConnection.s3LogUri",
+      "value" : null
+    }, {
+      "name" : "sdcEmrConnection.serviceRole",
+      "value" : "EMR_DefaultRole"
+    }, {
+      "name" : "sdcEmrConnection.jobFlowRole",
+      "value" : "EMR_EC2_DefaultRole"
+    }, {
+      "name" : "sdcEmrConnection.visibleToAllUsers",
+      "value" : true
+    }, {
+      "name" : "sdcEmrConnection.ec2SubnetId",
+      "value" : null
+    }, {
+      "name" : "sdcEmrConnection.masterSecurityGroup",
+      "value" : null
+    }, {
+      "name" : "sdcEmrConnection.slaveSecurityGroup",
+      "value" : null
+    }, {
+      "name" : "sdcEmrConnection.serviceAccessSecurityGroup",
+      "value" : null
+    }, {
+      "name" : "sdcEmrConnection.instanceCount",
+      "value" : 2
+    }, {
+      "name" : "sdcEmrConnection.stepConcurrency",
+      "value" : 1
+    }, {
+      "name" : "sdcEmrConnection.masterInstanceType",
+      "value" : null
+    }, {
+      "name" : "sdcEmrConnection.masterInstanceTypeCustom",
+      "value" : null
+    }, {
+      "name" : "sdcEmrConnection.slaveInstanceType",
+      "value" : null
+    }, {
+      "name" : "sdcEmrConnection.slaveInstanceTypeCustom",
+      "value" : null
+    }, {
+      "name" : "enableEMRDebugging",
+      "value" : true
+    }, {
+      "name" : "transformerEmrConnectionSelection",
+      "value" : "MANUAL"
+    }, {
+      "name" : "transformerEmrConnection.awsConfig.credentialMode",
+      "value" : "WITH_CREDENTIALS"
+    }, {
+      "name" : "transformerEmrConnection.awsConfig.awsAccessKeyId",
+      "value" : null
+    }, {
+      "name" : "transformerEmrConnection.awsConfig.awsSecretAccessKey",
+      "value" : null
+    }, {
+      "name" : "transformerEmrConnection.awsConfig.roleARN",
+      "value" : ""
+    }, {
+      "name" : "transformerEmrConnection.awsConfig.roleSessionName",
+      "value" : null
+    }, {
+      "name" : "transformerEmrConnection.awsConfig.sessionDuration",
+      "value" : 3600
+    }, {
+      "name" : "transformerEmrConnection.awsConfig.setSessionTags",
+      "value" : true
+    }, {
+      "name" : "transformerEmrConnection.region",
+      "value" : "US_WEST_2"
+    }, {
+      "name" : "transformerEmrConnection.customRegion",
+      "value" : null
+    }, {
+      "name" : "transformerEmrConnection.s3StagingUri",
+      "value" : null
+    }, {
+      "name" : "transformerEmrConnection.provisionNewCluster",
+      "value" : false
+    }, {
+      "name" : "transformerEmrConnection.clusterId",
+      "value" : null
+    }, {
+      "name" : "transformerEmrConnection.emrVersion",
+      "value" : null
+    }, {
+      "name" : "transformerEmrConnection.clusterPrefix",
+      "value" : null
+    }, {
+      "name" : "transformerEmrConnection.terminateCluster",
+      "value" : true
+    }, {
+      "name" : "transformerEmrConnection.loggingEnabled",
+      "value" : true
+    }, {
+      "name" : "transformerEmrConnection.s3LogUri",
+      "value" : null
+    }, {
+      "name" : "transformerEmrConnection.serviceRole",
+      "value" : "EMR_DefaultRole"
+    }, {
+      "name" : "transformerEmrConnection.jobFlowRole",
+      "value" : "EMR_EC2_DefaultRole"
+    }, {
+      "name" : "transformerEmrConnection.visibleToAllUsers",
+      "value" : true
+    }, {
+      "name" : "transformerEmrConnection.ec2SubnetId",
+      "value" : null
+    }, {
+      "name" : "transformerEmrConnection.masterSecurityGroup",
+      "value" : null
+    }, {
+      "name" : "transformerEmrConnection.slaveSecurityGroup",
+      "value" : null
+    }, {
+      "name" : "transformerEmrConnection.serviceAccessSecurityGroup",
+      "value" : null
+    }, {
+      "name" : "transformerEmrConnection.instanceCount",
+      "value" : 2
+    }, {
+      "name" : "transformerEmrConnection.stepConcurrency",
+      "value" : 1
+    }, {
+      "name" : "transformerEmrConnection.masterInstanceType",
+      "value" : null
+    }, {
+      "name" : "transformerEmrConnection.masterInstanceTypeCustom",
+      "value" : null
+    }, {
+      "name" : "transformerEmrConnection.slaveInstanceType",
+      "value" : null
+    }, {
+      "name" : "transformerEmrConnection.slaveInstanceTypeCustom",
+      "value" : null
+    }, {
+      "name" : "transformerEMRConfig.encryption",
+      "value" : "NONE"
+    }, {
+      "name" : "transformerEMRConfig.kmsKeyId",
+      "value" : null
+    }, {
+      "name" : "googleCloudCredentialsConfig.projectId",
+      "value" : null
+    }, {
+      "name" : "googleCloudCredentialsConfig.credentialsProvider",
+      "value" : "DEFAULT_PROVIDER"
+    }, {
+      "name" : "googleCloudCredentialsConfig.path",
+      "value" : null
+    }, {
+      "name" : "googleCloudCredentialsConfig.credentialsFileContent",
+      "value" : null
+    }, {
+      "name" : "googleCloudConfig.region",
+      "value" : null
+    }, {
+      "name" : "googleCloudConfig.customRegion",
+      "value" : null
+    }, {
+      "name" : "googleCloudConfig.gcsStagingUri",
+      "value" : null
+    }, {
+      "name" : "googleCloudConfig.create",
+      "value" : false
+    }, {
+      "name" : "googleCloudConfig.clusterPrefix",
+      "value" : null
+    }, {
+      "name" : "googleCloudConfig.version",
+      "value" : "1.4-ubuntu18"
+    }, {
+      "name" : "googleCloudConfig.masterType",
+      "value" : null
+    }, {
+      "name" : "googleCloudConfig.workerType",
+      "value" : null
+    }, {
+      "name" : "googleCloudConfig.networkType",
+      "value" : null
+    }, {
+      "name" : "googleCloudConfig.network",
+      "value" : null
+    }, {
+      "name" : "googleCloudConfig.subnet",
+      "value" : null
+    }, {
+      "name" : "googleCloudConfig.tags",
+      "value" : [ ]
+    }, {
+      "name" : "googleCloudConfig.workerCount",
+      "value" : 2
+    }, {
+      "name" : "googleCloudConfig.clusterName",
+      "value" : null
+    }, {
+      "name" : "googleCloudConfig.terminate",
+      "value" : null
+    }, {
+      "name" : "badRecordsHandling",
+      "value" : ""
+    }, {
+      "name" : "statsAggregatorStage",
+      "value" : ""
+    } ],
+    "uiInfo" : {
+      "previewConfig" : {
+        "previewSource" : "CONFIGURED_SOURCE",
+        "batchSize" : 10,
+        "timeout" : 120000,
+        "writeToDestinations" : false,
+        "executeLifecycleEvents" : false,
+        "showHeader" : true,
+        "showFieldType" : true,
+        "rememberMe" : false,
+        "clusterManagerType" : "CONFIGURED_CLUSTER",
+        "endStage" : ""
+      }
+    },
+    "fragments" : [ ],
+    "stages" : [ {
+      "instanceName" : "File_01",
+      "library" : "streamsets-spark-file-lib",
+      "stageName" : "com_streamsets_pipeline_spark_origin_fs_FileDOrigin",
+      "stageVersion" : "2",
+      "configuration" : [ {
+        "name" : "configBean.fileNamePattern",
+        "value" : "*"
+      }, {
+        "name" : "configBean.fileNameExcludePattern",
+        "value" : null
+      }, {
+        "name" : "configBean.batchNumFileLimit",
+        "value" : 0
+      }, {
+        "name" : "configBean.schemaConfigBean.schemaMode",
+        "value" : "INFER"
+      }, {
+        "name" : "configBean.schemaConfigBean.customSchemaString",
+        "value" : null
+      }, {
+        "name" : "configBean.schemaConfigBean.parseErrorMode",
+        "value" : "PERMISSIVE"
+      }, {
+        "name" : "configBean.schemaConfigBean.columnNameOfCorruptRecord",
+        "value" : null
+      }, {
+        "name" : "configBean.postProcessType",
+        "value" : "NONE"
+      }, {
+        "name" : "configBean.archiveDir",
+        "value" : null
+      }, {
+        "name" : "configBean.dataFormatConfig.csvHeader",
+        "value" : true
+      }, {
+        "name" : "configBean.dataFormatConfig.csvDelimiter",
+        "value" : ","
+      }, {
+        "name" : "configBean.dataFormatConfig.csvQuote",
+        "value" : "\""
+      }, {
+        "name" : "configBean.dataFormatConfig.csvEscape",
+        "value" : "\\"
+      }, {
+        "name" : "configBean.dataFormatConfig.rootTag",
+        "value" : "ROWS"
+      }, {
+        "name" : "configBean.dataFormatConfig.rowTag",
+        "value" : "ROW"
+      }, {
+        "name" : "configBean.dataFormatConfig.multiLineJson",
+        "value" : false
+      }, {
+        "name" : "configBean.dataFormatConfig.avroSchema",
+        "value" : null
+      }, {
+        "name" : "configBean.dataFormatConfig.avroIgnoreExtension",
+        "value" : true
+      }, {
+        "name" : "configBean.path",
+        "value" : "/data/transformer/lab3/master"
+      }, {
+        "name" : "configBean.dataFormat",
+        "value" : "PARQUET"
+      }, {
+        "name" : "configBean.hdfsProperties",
+        "value" : [ { } ]
+      }, {
+        "name" : "noReload",
+        "value" : false
+      }, {
+        "name" : "cache",
+        "value" : false
+      }, {
+        "name" : "skipOffsetTracking",
+        "value" : false
+      } ],
+      "uiInfo" : {
+        "yPos" : 51,
+        "stageType" : "SOURCE",
+        "icon" : "directory.png",
+        "description" : "",
+        "label" : "File - Master",
+        "xPos" : 68
+      },
+      "inputLanes" : [ ],
+      "outputLanes" : [ "File_01OutputLane16117559223610" ],
+      "eventLanes" : [ ],
+      "services" : [ ]
+    }, {
+      "instanceName" : "Snowflake_01",
+      "library" : "streamsets-spark-snowflake-lib",
+      "stageName" : "com_streamsets_pipeline_spark_origin_snowflake_SnowflakeDOrigin",
+      "stageVersion" : "4",
+      "configuration" : [ {
+        "name" : "conf.readMode",
+        "value" : "QUERY"
+      }, {
+        "name" : "conf.table",
+        "value" : null
+      }, {
+        "name" : "conf.query",
+        "value" : "SELECT * FROM EMPLOYEE WHERE LOAD_DATE > '$offset' ORDER BY LOAD_DATE"
+      }, {
+        "name" : "conf.useCopyUnload",
+        "value" : true
+      }, {
+        "name" : "conf.partitionSize",
+        "value" : 100
+      }, {
+        "name" : "conf.incrementalMode",
+        "value" : true
+      }, {
+        "name" : "conf.initialOffset",
+        "value" : "0"
+      }, {
+        "name" : "conf.offsetColumn",
+        "value" : "LOAD_DATE"
+      }, {
+        "name" : "conf.columnCase",
+        "value" : false
+      }, {
+        "name" : "conf.enablePushdown",
+        "value" : true
+      }, {
+        "name" : "conf.snowflakeRegion",
+        "value" : "US_WEST_1"
+      }, {
+        "name" : "conf.customSnowflakeRegion",
+        "value" : null
+      }, {
+        "name" : "conf.customUrl",
+        "value" : ""
+      }, {
+        "name" : "conf.account",
+        "value" : null
+      }, {
+        "name" : "conf.user",
+        "value" : null
+      }, {
+        "name" : "conf.password",
+        "value" : null
+      }, {
+        "name" : "conf.warehouse",
+        "value" : "COMPUTE_WH"
+      }, {
+        "name" : "conf.database",
+        "value" : "STREAMSETS_DAY"
+      }, {
+        "name" : "conf.schema",
+        "value" : "LABS"
+      }, {
+        "name" : "conf.parallelismCount",
+        "value" : 4
+      }, {
+        "name" : "conf.additionalProperties",
+        "value" : [ { } ]
+      }, {
+        "name" : "noReload",
+        "value" : false
+      }, {
+        "name" : "cache",
+        "value" : false
+      }, {
+        "name" : "skipOffsetTracking",
+        "value" : false
+      } ],
+      "uiInfo" : {
+        "yPos" : 202,
+        "stageType" : "SOURCE",
+        "icon" : "snowflake.png",
+        "description" : "",
+        "label" : "Snowflake - Changes",
+        "xPos" : 70
+      },
+      "inputLanes" : [ ],
+      "outputLanes" : [ "Snowflake_01OutputLane16117559503260" ],
+      "eventLanes" : [ ],
+      "services" : [ ]
+    }, {
+      "instanceName" : "SlowlyChangingDimension_01",
+      "library" : "streamsets-spark-basic-lib",
+      "stageName" : "com_streamsets_pipeline_spark_processor_scd_SCDDProcessor",
+      "stageVersion" : "1",
+      "configuration" : [ {
+        "name" : "conf.scdType",
+        "value" : "TYPE_2"
+      }, {
+        "name" : "conf.outputFullMasterData",
+        "value" : true
+      }, {
+        "name" : "conf.copyNullsFromOriginal",
+        "value" : false
+      }, {
+        "name" : "conf.extraColumnMode",
+        "value" : "DROP"
+      }, {
+        "name" : "conf.naturalKeyColumns",
+        "value" : [ "ID" ]
+      }, {
+        "name" : "conf.managedColumnConfigs",
+        "value" : [ {
+          "managedColumnType" : "ACTIVE_FLAG",
+          "managedColumnName" : "ACTIVE_FLAG"
+        }, {
+          "managedColumnType" : "START_TIMESTAMP",
+          "managedColumnName" : "START_TIMESTAMP"
+        }, {
+          "managedColumnType" : "END_TIMESTAMP",
+          "managedColumnName" : "END_TIMESTAMP"
+        } ]
+      }, {
+        "name" : "conf.timestampBasis",
+        "value" : "FROM_DATA"
+      }, {
+        "name" : "conf.timestampBasisField",
+        "value" : "LOAD_DATE"
+      }, {
+        "name" : "conf.type2ForAllChanges",
+        "value" : true
+      }, {
+        "name" : "conf.type2IncludeFields",
+        "value" : [ ]
+      }, {
+        "name" : "conf.type2ExcludeFields",
+        "value" : [ ]
+      } ],
+      "uiInfo" : {
+        "yPos" : 131,
+        "stageType" : "PROCESSOR",
+        "icon" : "iconfinder_Hosting-19_2106411.png",
+        "description" : "",
+        "inputStreamLabels" : [ "Master Data", "Change Input" ],
+        "label" : "Slowly Changing Dimension 1",
+        "xPos" : 297
+      },
+      "inputLanes" : [ "File_01OutputLane16117559223610", "Snowflake_01OutputLane16117559503260" ],
+      "outputLanes" : [ "SlowlyChangingDimension_01OutputLane16117560819830" ],
+      "eventLanes" : [ ],
+      "services" : [ ]
+    }, {
+      "instanceName" : "Repartition_01",
+      "library" : "streamsets-spark-basic-lib",
+      "stageName" : "com_streamsets_pipeline_spark_transform_repartition_RepartitionDTransform",
+      "stageVersion" : "1",
+      "configuration" : [ {
+        "name" : "conf.repartitionType",
+        "value" : "COALESCE"
+      }, {
+        "name" : "conf.partitionSizeType",
+        "value" : "NUMBER_OF_PARTITIONS"
+      }, {
+        "name" : "conf.integerPartitions",
+        "value" : 1
+      }, {
+        "name" : "conf.maxRecordsPerPartition",
+        "value" : 1
+      }, {
+        "name" : "conf.repartitionFields",
+        "value" : [ ]
+      }, {
+        "name" : "cache",
+        "value" : false
+      } ],
+      "uiInfo" : {
+        "yPos" : 131,
+        "stageType" : "PROCESSOR",
+        "icon" : "repartition.png",
+        "description" : "",
+        "label" : "Repartition 1",
+        "xPos" : 517
+      },
+      "inputLanes" : [ "SlowlyChangingDimension_01OutputLane16117560819830" ],
+      "outputLanes" : [ "Repartition_01OutputLane16117561646140" ],
+      "eventLanes" : [ ],
+      "services" : [ ]
+    }, {
+      "instanceName" : "File_02",
+      "library" : "streamsets-spark-file-lib",
+      "stageName" : "com_streamsets_pipeline_spark_destination_fs_FileWriterDDestination",
+      "stageVersion" : "2",
+      "configuration" : [ {
+        "name" : "configBean.writeMode",
+        "value" : "OVERWRITE"
+      }, {
+        "name" : "configBean.fieldToWrite",
+        "value" : null
+      }, {
+        "name" : "configBean.partitionByColumns",
+        "value" : [ ]
+      }, {
+        "name" : "configBean.filterUnrelatedScdMasterRecords",
+        "value" : false
+      }, {
+        "name" : "configBean.dataGeneratorFormatConfig.csvHeader",
+        "value" : true
+      }, {
+        "name" : "configBean.dataGeneratorFormatConfig.csvDelimiter",
+        "value" : ","
+      }, {
+        "name" : "configBean.dataGeneratorFormatConfig.csvQuote",
+        "value" : "\""
+      }, {
+        "name" : "configBean.dataGeneratorFormatConfig.csvEscape",
+        "value" : "\\"
+      }, {
+        "name" : "configBean.dataGeneratorFormatConfig.rootTag",
+        "value" : "ROWS"
+      }, {
+        "name" : "configBean.dataGeneratorFormatConfig.rowTag",
+        "value" : "ROW"
+      }, {
+        "name" : "configBean.path",
+        "value" : "/data/transformer/lab3/master"
+      }, {
+        "name" : "configBean.dataFormat",
+        "value" : "PARQUET"
+      }, {
+        "name" : "configBean.hdfsProperties",
+        "value" : [ { } ]
+      } ],
+      "uiInfo" : {
+        "yPos" : 132,
+        "stageType" : "TARGET",
+        "icon" : "directory.png",
+        "description" : "",
+        "label" : "File - Master",
+        "xPos" : 737
+      },
+      "inputLanes" : [ "Repartition_01OutputLane16117561646140" ],
+      "outputLanes" : [ ],
+      "eventLanes" : [ ],
+      "services" : [ ]
+    } ],
+    "errorStage" : null,
+    "info" : {
+      "pipelineId" : "Solution0d2e0871-6994-4d69-b653-ac198e8e637a",
+      "title" : "Solution - Lab 3 SCD",
+      "description" : "Tutorial - https://academy.streamsets.com/courses/streamsets-day/",
+      "created" : 1611755906833,
+      "lastModified" : 1611783906793,
+      "creator" : "admin",
+      "lastModifier" : "admin",
+      "lastRev" : "0",
+      "uuid" : "163425f3-5d8f-4d79-a5d1-6e45b5e9cd5f",
+      "valid" : false,
+      "metadata" : {
+        "labels" : [ "origin:File", "origin:Snowflake", "destination:File" ]
+      },
+      "name" : "Solution0d2e0871-6994-4d69-b653-ac198e8e637a",
+      "sdcVersion" : "3.17.0",
+      "sdcId" : "6c930b70-6023-11eb-8bb4-d339a9cab83d"
+    },
+    "metadata" : {
+      "labels" : [ "origin:File", "origin:Snowflake", "destination:File" ]
+    },
+    "statsAggregatorStage" : null,
+    "startEventStages" : [ ],
+    "stopEventStages" : [ ],
+    "testOriginStage" : null,
+    "valid" : false,
+    "issues" : {
+      "pipelineIssues" : [ ],
+      "stageIssues" : {
+        "Snowflake_01" : [ {
+          "instanceName" : "Snowflake_01",
+          "serviceName" : null,
+          "level" : "STAGE_CONFIG",
+          "configGroup" : "CONNECTION",
+          "configName" : "conf.account",
+          "message" : "VALIDATION_0007 - Configuration value is required",
+          "count" : 1,
+          "additionalInfo" : null,
+          "antennaDoctorMessages" : null
+        }, {
+          "instanceName" : "Snowflake_01",
+          "serviceName" : null,
+          "level" : "STAGE_CONFIG",
+          "configGroup" : "CONNECTION",
+          "configName" : "conf.user",
+          "message" : "VALIDATION_0007 - Configuration value is required",
+          "count" : 1,
+          "additionalInfo" : null,
+          "antennaDoctorMessages" : null
+        }, {
+          "instanceName" : "Snowflake_01",
+          "serviceName" : null,
+          "level" : "STAGE_CONFIG",
+          "configGroup" : "CONNECTION",
+          "configName" : "conf.password",
+          "message" : "VALIDATION_0007 - Configuration value is required",
+          "count" : 1,
+          "additionalInfo" : null,
+          "antennaDoctorMessages" : null
+        } ]
+      },
+      "issueCount" : 3
+    },
+    "previewable" : false
+  },
+  "pipelineRules" : {
+    "schemaVersion" : 3,
+    "version" : 2,
+    "metricsRuleDefinitions" : [ {
+      "id" : "badRecordsAlertID",
+      "alertText" : "High incidence of Error Records",
+      "metricId" : "pipeline.batchErrorRecords.counter",
+      "metricType" : "COUNTER",
+      "metricElement" : "COUNTER_COUNT",
+      "condition" : "${value() > 100}",
+      "sendEmail" : false,
+      "enabled" : false,
+      "timestamp" : 1611755906929,
+      "valid" : true
+    }, {
+      "id" : "stageErrorAlertID",
+      "alertText" : "High incidence of Stage Errors",
+      "metricId" : "pipeline.batchErrorMessages.counter",
+      "metricType" : "COUNTER",
+      "metricElement" : "COUNTER_COUNT",
+      "condition" : "${value() > 100}",
+      "sendEmail" : false,
+      "enabled" : false,
+      "timestamp" : 1611755906929,
+      "valid" : true
+    }, {
+      "id" : "idleGaugeID",
+      "alertText" : "Pipeline is Idle",
+      "metricId" : "RuntimeStatsGauge.gauge",
+      "metricType" : "GAUGE",
+      "metricElement" : "TIME_OF_LAST_RECEIVED_RECORD",
+      "condition" : "${time:now() - value() > 120000}",
+      "sendEmail" : false,
+      "enabled" : false,
+      "timestamp" : 1611755906929,
+      "valid" : true
+    }, {
+      "id" : "batchTimeAlertID",
+      "alertText" : "Batch taking more time to process",
+      "metricId" : "RuntimeStatsGauge.gauge",
+      "metricType" : "GAUGE",
+      "metricElement" : "CURRENT_BATCH_AGE",
+      "condition" : "${value() > 200}",
+      "sendEmail" : false,
+      "enabled" : false,
+      "timestamp" : 1611755906929,
+      "valid" : true
+    } ],
+    "dataRuleDefinitions" : [ ],
+    "driftRuleDefinitions" : [ ],
+    "uuid" : "86809764-0a5e-4510-adc3-7c534ba16ed9",
+    "configuration" : [ {
+      "name" : "emailIDs",
+      "value" : [ ]
+    }, {
+      "name" : "webhookConfigs",
+      "value" : [ ]
+    } ],
+    "configIssues" : [ ],
+    "ruleIssues" : [ ]
+  },
+  "libraryDefinitions" : null
+}
